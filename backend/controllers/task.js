@@ -1,6 +1,6 @@
 const Task = require('../services/task');
 
-export async function create(req, res) {
+async function create(req, res) {
   try {
     const newTask = await Task.create(req.body);
     res.status(201).json(newTask);
@@ -9,29 +9,36 @@ export async function create(req, res) {
   }
 }
 
-export async function get(_req, res) {
+async function get(_req, res) {
   try {
-    const tasks = await Task.find();
+    const tasks = await Task.get();
     res.json(tasks);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 }
 
-export async function put(req, res) {
+async function put(req, res) {
   try {
-    const task = await Task.findOneAndUpdate({ _id: req.params.id }, req.body);
+    const task = await Task.put({ _id: req.params.id, task: req.body });
     res.status(200).json(task);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 }
 
-export async function deleteTask(req, res) {
+async function deleteTask(req, res) {
   try {
-    const task = await Task.findOneAndDelete({ _id: req.params.id });
+    const task = await Task.deleteTask({ _id: req.params.id });
     res.status(200).json(task);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 }
+
+module.exports = {
+  create,
+  get,
+  put,
+  deleteTask
+};
