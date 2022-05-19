@@ -28,8 +28,9 @@ async function put(req, res) {
 }
 
 async function deleteTask(req, res) {
+  const { id } = req.params;
   try {
-    const task = await Task.deleteTask({ _id: req.params.id });
+    const task = await Task.deleteTask(id);
     res.status(200).json(task);
   } catch (error) {
     res.status(500).json({ error: error.message });

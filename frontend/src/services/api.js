@@ -1,5 +1,7 @@
 import axios from 'axios';
-const apiUrl = 'http://localhost:3000/api/tasks';
+
+const port = process.env.PORT_SERVER || 3001;
+const apiUrl = `http://localhost:${port}/api/tasks`;
 
 export function getTasks() {
   return axios.get(apiUrl);
@@ -10,7 +12,7 @@ export function createTask(task) {
 }
 
 export function updateTask(task) {
-  return axios.put(`${apiUrl}/${task.id}`, task.completed);
+  return axios.put(`${apiUrl}/${task._id}`, { completed: task.completed });
 }
 
 export function deleteTask(id) {

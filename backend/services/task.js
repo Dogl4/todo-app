@@ -27,9 +27,9 @@ async function put({ _id, task }) {
   }
 }
 
-async function deleteTask({ _id }) {
+async function deleteTask(id) {
   try {
-    const result = await Task.findOneAndDelete(_id);
+    const result = await Task.findOneAndDelete({ _id: id });
     return result;
   } catch (error) {
     return error;

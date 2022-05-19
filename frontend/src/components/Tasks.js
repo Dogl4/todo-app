@@ -14,8 +14,8 @@ class Tasks extends React.Component {
     }
   }
 
-  handleChange = ({ customTask: input }) => {
-    this.setState({ customTask: input.value });
+  handleChange = ({ value }) => {
+    this.setState({ customTask: value });
   };
 
   handleSubmit = async (event) => {
@@ -32,23 +32,25 @@ class Tasks extends React.Component {
   handleUpdate = async (task) => {
     try {
       const tasks = [...this.state.tasks];
-      const index = tasks.findIndex((t) => t.id === task.id);
+      const index = tasks.indexOf(task);
       tasks[index] = { ...tasks[index] };
       tasks[index].completed = !tasks[index].completed;
       this.setState({ tasks });
-      await updateTask({ id: task, completed: tasks[index].completed });
+      await updateTask(tasks[index]);
     } catch (error) {
       this.setState({ tasks: this.state.tasks });
       console.log(error);
     }
   };
 
-  handleDelete = async (id) => {
+  handleDelete = async (task) => {
     const copyTasks = [...this.state.tasks];
     try {
-      const tasks = copyTasks.filter((task) => task.id !== id);
-      this.setState({ tasks });
-      await deleteTask(id);
+      // const index = copyTasks.indexOf(task);
+      const newTasks = copyTasks.filter((t) => t._id !== task._id);
+      this.setState({ tasks: newTasks });
+      console.log('task', task);
+      await deleteTask(task._id);
     } catch (error) {
       this.setState({ tasks: this.state.tasks });
       console.log(error);
