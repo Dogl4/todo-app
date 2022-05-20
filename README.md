@@ -11,7 +11,7 @@ Principais tecnologias utilizadas neste projeto foram: [Node](https://nodejs.org
 
 ## Clone
 1. Para rodar este projeto em sua máquina, tenha: **node** e **mongodb** instalado e configurado em sua máquina.
-2. Clone este projeto ou via git, rode no terminal:  `git clone git@github.com:Dogl4/todo-app.git`,  ou baixe .zipado  [aqui](https:github.com/Dogl4/todo-app/archive/refs/heads/master.zip).
+2. Clone este projeto ou via git, rode no terminal:  `git clone git@github.com:Dogl4/todo-app.git`,  ou baixe .zipado  [aqui](https://github.com/Dogl4/todo-app/archive/refs/heads/master.zip).
 
 ## Comandos
  No terminal, na raiz deste projeto rode estes comandos para iniciar a aplicação.
