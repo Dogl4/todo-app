@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node ./backend/index.js"
+    "prestartBackend": "sh ./scripts/prestartBackend.sh",
+    "prestartFrontend": "sh ./scripts/prestartFrontend.sh",
+    "dev": "npx pm2 start ./scripts/prestartBackend.sh && npx pm2 start ./scripts/prestartFrontend.sh",
+    "stop": "npx pm2 delete prestartBackend && npx pm2 delete prestartFrontend"
   },
   "keywords": [],
   "author": "",
@@ -19,5 +22,8 @@
     "eslint-plugin-promise": "^6.0.0",
     "eslint-plugin-react": "^7.29.4",
     "prettier": "^2.6.2"
+  },
+  "dependencies": {
+    "pm2": "^5.2.0"
   }
 }
