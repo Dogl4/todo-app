@@ -50,6 +50,7 @@ class App extends Tasks {
                 <option value="em andamento">Em Andamento</option>
                 <option value="pronto">Pronto</option>
               </select>
+              <span>{`${task.dateCreated}`}</span>
               <button
                 className="delete"
                 onClick={() => this.handleDelete(task)}
