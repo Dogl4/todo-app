@@ -9,6 +9,14 @@ const taskShema = new Shema({
   completed: {
     type: Boolean,
     default: false
+  },
+  dateCreated: {
+    type: Date,
+    default: Date.now
+  },
+  status: {
+    type: String,
+    default: 'pendente'
   }
 });
 

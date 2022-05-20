@@ -12,7 +12,7 @@ export function createTask(task) {
 }
 
 export function updateTask(task) {
-  return axios.put(`${apiUrl}/${task._id}`, { completed: task.completed });
+  return axios.put(`${apiUrl}/${task._id}`, { ...task });
 }
 
 export function deleteTask(id) {

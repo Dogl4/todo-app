@@ -3,7 +3,7 @@ import React from 'react';
 import { createTask, getTasks, updateTask, deleteTask } from '../services/api';
 
 class Tasks extends React.Component {
-  state = { tasks: [], customTask: '' };
+  state = { tasks: [], customTask: '', status: '' };
 
   async componentDidMount() {
     try {
@@ -14,8 +14,8 @@ class Tasks extends React.Component {
     }
   }
 
-  handleChange = ({ value }) => {
-    this.setState({ customTask: value });
+  handleChange = ({ name, value }) => {
+    this.setState({ [name]: value });
   };
 
   handleSubmit = async (event) => {
@@ -29,12 +29,31 @@ class Tasks extends React.Component {
     }
   };
 
-  handleUpdate = async (task) => {
+  handleUpdate = async (task, type, e = null) => {
     try {
       const tasks = [...this.state.tasks];
       const index = tasks.indexOf(task);
       tasks[index] = { ...tasks[index] };
-      tasks[index].completed = !tasks[index].completed;
+      if (type === 'completed') {
+        tasks[index].completed = !tasks[index].completed;
+        if (tasks[index].completed) {
+          tasks[index].status = 'pronto';
+          document.getElementById(tasks[index]._id).checked = true;
+        } else {
+          tasks[index].status = 'em andamento';
+          document.getElementById(tasks[index]._id).checked = false;
+        }
+      }
+      if (type === 'status') {
+        tasks[index].status = e;
+        if (e === 'pronto') {
+          tasks[index].completed = true;
+          document.getElementById(tasks[index]._id).checked = true;
+        } else {
+          tasks[index].completed = false;
+          document.getElementById(tasks[index]._id).checked = false;
+        }
+      }
       this.setState({ tasks });
       await updateTask(tasks[index]);
     } catch (error) {
@@ -46,20 +65,14 @@ class Tasks extends React.Component {
   handleDelete = async (task) => {
     const copyTasks = [...this.state.tasks];
     try {
-      // const index = copyTasks.indexOf(task);
       const newTasks = copyTasks.filter((t) => t._id !== task._id);
       this.setState({ tasks: newTasks });
-      console.log('task', task);
       await deleteTask(task._id);
     } catch (error) {
       this.setState({ tasks: this.state.tasks });
       console.log(error);
     }
   };
-
-  render() {
-    return <h2>A</h2>;
-  }
 }
 
 export default Tasks;

@@ -30,10 +30,16 @@
 
 .task {
   flex-grow: 1;
-  margin-left: 10px;
+  padding: 0 10px;
+  margin: 0 5px;
 }
 
 .line_through {
   text-decoration: line-through;
   background-color: chartreuse;
+}
+
+.delete {
+  cursor: pointer;
+  color: red;
 }
